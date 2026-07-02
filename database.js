@@ -195,7 +195,7 @@ function connectDB() {
 
   const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/vibecheck';
 
-  dbConnectionPromise = mongoose.connect(mongoUri)
+  dbConnectionPromise = mongoose.connect(mongoUri, { serverSelectionTimeoutMS: 5000 })
     .then(() => {
       console.log('✨ MongoDB Connected successfully.');
       isOffline = false;
