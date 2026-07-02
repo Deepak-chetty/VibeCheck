@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe Check — find your kind of place</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #0f1e1a;
+      color: #f3e9d2;
+      font-family: 'Public Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      padding: 40px;
+      background: #152e27;
+      border: 1px solid rgba(243,233,210,0.12);
+      border-radius: 18px;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.4);
+    }
+    h1 {
+      font-family: 'Fraunces', serif;
+      color: #ff6b4a;
+      margin-top: 0;
+      font-size: 28px;
+    }
+    p {
+      color: #9fbbae;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 999px;
+      padding: 12px 28px;
+      background: #ff6b4a;
+      color: #1a0d08;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #ff7f61;
+    }
+  </style>
+  <script>
+    // Automatically redirect to server if it is running
+    setTimeout(() => {
+      window.location.href = "http://localhost:3000";
+    }, 2000);
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>VibeCheck Upgraded</h1>
+    <p>This project has been upgraded to a full-stack MERN application with a Node/Express backend, JWT authentication, reward points, and review analytics.</p>
+    <p>You are being automatically redirected to the running server...</p>
+    <a href="http://localhost:3000" class="btn">Go to VibeCheck (http://localhost:3000)</a>
+  </div>
+</body>
+</html>
