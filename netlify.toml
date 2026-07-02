@@ -1,0 +1,24 @@
+# Netlify Configuration File
+
+[build]
+  # The directory that contains the static frontend assets
+  publish = "public"
+
+  # No build command is needed since it is a vanilla JS/CSS app
+  command = ""
+
+[[redirects]]
+  # Redirect all frontend page routes to index.html for Single Page App routing
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# OPTIONAL: Backend Proxying
+# If you deploy your backend server to a platform like Render or Railway (e.g. https://vibecheck-api.onrender.com),
+# uncomment the rule below to proxy all frontend "/api/*" calls to your backend automatically:
+#
+# [[redirects]]
+#   from = "/api/*"
+#   to = "https://your-deployed-backend-url.com/api/:splat"
+#   status = 200
+#   force = true
