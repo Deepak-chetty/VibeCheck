@@ -12,7 +12,11 @@ let isOffline = false;
 
 // Initialize JSON database if it doesn't exist
 if (!fs.existsSync(DB_FILE)) {
-  fs.writeFileSync(DB_FILE, JSON.stringify({ users: [], gems: [], reviews: [] }, null, 2));
+  try {
+    fs.writeFileSync(DB_FILE, JSON.stringify({ users: [], gems: [], reviews: [] }, null, 2));
+  } catch (err) {
+    console.warn('⚠️ Could not initialize local db.json:', err.message);
+  }
 }
 
 // Read/Write helper for JSON DB fallback
@@ -26,7 +30,11 @@ function readLocalDB() {
 }
 
 function writeLocalDB(data) {
-  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+  try {
+    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+  } catch (err) {
+    console.warn('⚠️ Offline DB write failed (read-only filesystem):', err.message);
+  }
 }
 
 // -------------------------------------------------------------

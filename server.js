@@ -14,6 +14,21 @@ const JWT_SECRET = process.env.JWT_SECRET || 'supersecretvibecheckkey123!';
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serverless DB connection helper middleware
+let isDbConnected = false;
+app.use(async (req, res, next) => {
+  if (!isDbConnected) {
+    try {
+      await connectDB();
+      isDbConnected = true;
+    } catch (err) {
+      console.error('⚠️ DB lazy connection failed:', err.message);
+    }
+  }
+  next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // -------------------------------------------------------------
@@ -492,9 +507,14 @@ app.get('/api/analytics', async (req, res) => {
   }
 });
 
-// Start Server
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`🚀 VibeCheck server is running at http://localhost:${PORT}`);
+// Start Server locally if run directly
+if (require.main === module) {
+  connectDB().then(() => {
+    app.listen(PORT, () => {
+      console.log(`🚀 VibeCheck server is running at http://localhost:${PORT}`);
+    });
   });
-});
+}
+
+// Export app for serverless function importing
+module.exports = app;
