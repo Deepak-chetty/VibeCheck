@@ -65,6 +65,28 @@ const AVAILABLE_VOUCHERS = [
   { id: 'v5', name: 'Free Traditional Dinner at Bishnoi Village', cost: 300, description: 'An authentic Rajasthani village meal cooked on an earthen stove.' }
 ];
 
+// Health and diagnostics route for serverless testing
+app.get('/api/health', (req, res) => {
+  const { checkOfflineStatus } = require('./database');
+  const mongoose = require('mongoose');
+
+  let maskedUri = 'NOT_SET';
+  if (process.env.MONGODB_URI) {
+    maskedUri = process.env.MONGODB_URI.replace(/:([^:@]+)@/, ':******@');
+  }
+
+  res.json({
+    status: 'healthy',
+    isOfflineMode: checkOfflineStatus(),
+    mongooseState: mongoose.connection.readyState,
+    env: {
+      MONGODB_URI: maskedUri,
+      JWT_SECRET_SET: !!process.env.JWT_SECRET,
+      NODE_ENV: process.env.NODE_ENV || 'development'
+    }
+  });
+});
+
 // -------------------------------------------------------------
 // AUTHENTICATION MIDDLEWARE
 // -------------------------------------------------------------
